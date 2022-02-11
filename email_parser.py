@@ -26,7 +26,7 @@ def get_data(username, password, host):
     # print(imap.list())  # Returns all folders available in email account
 
     imap.select("INBOX")  # Select "INBOX" folder
-    _, messages = imap.search(None, '(FROM "paolo1013@gmail.com")')  # Search for messages from a specific sender
+    _, messages = imap.search(None, '(FROM "example@host.com")')  # Search for messages from a specific sender
 
     print("Total number of messages from sender:", len(messages[0].split()))
 
