@@ -15,7 +15,7 @@ import imaplib
 import json
 
 
-def get_data(username, password, host):
+def get_data(username, password, sender, host):
 
     # create an IMAP4 class with SSL 
     imap = imaplib.IMAP4_SSL(host)
@@ -26,7 +26,7 @@ def get_data(username, password, host):
     # print(imap.list())  # Returns all folders available in email account
 
     imap.select("INBOX")  # Select "INBOX" folder
-    _, messages = imap.search(None, '(FROM "example@host.com")')  # Search for messages from a specific sender
+    _, messages = imap.search(None, 'FROM', sender)  # Searches for messages from a specific sender
 
     print("Total number of messages from sender:", len(messages[0].split()))
 
@@ -67,9 +67,10 @@ def get_data(username, password, host):
 
 if __name__ == "__main__":
 
-    username = "example@host.com"  # Enter your email here
+    username = input("Please Enter Your Email Address: ")  # Enter your email here
     password = getpass("Please Enter Your Password: ")  # Input password from command line. Hidden visibility.
+    sender = input("Enter the Sender's Email Address for a Summary of Their Messages: ")
     host = "imap.gmail.com"
-    print(get_data(username, password, host))
+    print(get_data(username, password, sender, host))
 
 
